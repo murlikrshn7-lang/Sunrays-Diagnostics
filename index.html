@@ -1,0 +1,821 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sunrays Diagnostic | Diagnostic Healthcare Services</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <!-- Supabase JS Client Library -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brandBlue: '#0A2540',
+            brandCyan: '#00A8CC',
+            brandLight: '#F4F7FB'
+          }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="font-sans text-gray-700 bg-white relative">
+
+  <!-- TOP HEADER / CONTACT BAR -->
+  <div class="bg-brandBlue text-white text-xs py-1.5 px-3 sm:px-8">
+    <div class="max-w-7xl mx-auto flex justify-between items-center gap-2">
+      <div class="flex items-center gap-3 truncate">
+        <a href="tel:+919347788171" class="hover:text-brandCyan flex items-center gap-1.5 shrink-0">
+          <i class="fa-solid fa-phone text-brandCyan text-[11px]"></i>
+          <span class="font-medium text-xs">+91-9347788171</span>
+        </a>
+        <a href="mailto:Sunraysdiagnostics2023@gmail.com" class="hover:text-brandCyan hidden sm:flex items-center gap-1.5 truncate">
+          <i class="fa-solid fa-envelope text-brandCyan text-xs"></i>
+          <span class="truncate">Sunraysdiagnostics2023@gmail.com</span>
+        </a>
+      </div>
+      <div class="flex items-center gap-2.5 shrink-0">
+        <a href="#" class="hover:text-brandCyan"><i class="fa-brands fa-facebook-f text-xs"></i></a>
+        <a href="#" class="hover:text-brandCyan"><i class="fa-brands fa-instagram text-xs"></i></a>
+        <a href="#" class="hover:text-brandCyan"><i class="fa-brands fa-youtube text-xs"></i></a>
+      </div>
+    </div>
+  </div>
+
+  <!-- NAVIGATION BAR -->
+  <nav class="bg-white shadow-md sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto px-3 sm:px-8 py-2 sm:py-3 flex justify-between items-center gap-2">
+      <a href="#" class="flex items-center gap-2 shrink-0">
+        <div class="w-8 h-8 sm:w-10 sm:h-10 bg-brandCyan text-white flex items-center justify-center font-bold text-base sm:text-xl rounded-full shrink-0">
+          S
+        </div>
+        <div>
+          <span class="text-sm sm:text-xl font-bold text-brandBlue block leading-none">SUNRAYS</span>
+          <span class="text-[9px] sm:text-xs text-brandCyan font-semibold tracking-wider block">DIAGNOSTICS</span>
+        </div>
+      </a>
+      <div class="hidden lg:flex items-center gap-8 font-medium text-gray-600">
+        <a href="#home" class="text-brandCyan">Home</a>
+        <a href="#about" class="hover:text-brandCyan">About Us</a>
+        <a href="#services" class="hover:text-brandCyan">Services</a>
+        <a href="#packages" class="hover:text-brandCyan">Health Packages</a>
+        <a href="#contact" class="hover:text-brandCyan">Contact Us</a>
+      </div>
+      <a href="#book" class="bg-brandCyan text-white px-3 py-1.5 sm:px-5 sm:py-2.5 rounded-md font-semibold text-xs sm:text-sm hover:bg-cyan-600 transition shadow shrink-0 text-center whitespace-nowrap">
+        Book Collection
+      </a>
+    </div>
+  </nav>
+
+  <!-- HERO SECTION -->
+  <section id="home" class="bg-gradient-to-r from-brandBlue to-slate-800 text-white py-8 sm:py-12 px-4 sm:px-8">
+    <div class="max-w-7xl mx-auto grid md:grid-cols-2 gap-8 items-center">
+      
+      <div>
+        <span class="bg-brandCyan/20 text-brandCyan px-3 py-1 rounded-full text-xs font-semibold inline-block mb-3">
+          Trusted Diagnostics, Timely Results
+        </span>
+        <h1 class="text-2xl sm:text-5xl font-extrabold tracking-tight mb-3 leading-tight">
+          Accurate Reports Delivered Fast With Modern Care
+        </h1>
+        <p class="text-gray-300 text-xs sm:text-base mb-5">
+          Located in Gajularamaram, Hyderabad. Precision pathology, Digital X-Ray, Ultrasound, 2D ECHO & ECG.
+        </p>
+
+        <!-- PROMO OFFERS SLIDER -->
+        <div class="relative bg-slate-900/90 border border-brandCyan/40 rounded-2xl p-4 sm:p-5 mb-6 overflow-hidden shadow-2xl backdrop-blur-md">
+          <div class="flex items-center justify-between mb-3">
+            <span class="bg-gradient-to-r from-amber-500 to-red-500 text-white text-[10px] uppercase font-bold tracking-widest px-2.5 py-0.5 rounded-full flex items-center gap-1 shadow">
+              <i class="fa-solid fa-fire text-yellow-200"></i> Special Offer
+            </span>
+            <div class="flex gap-2">
+              <button type="button" onclick="prevOfferSlide()" class="w-7 h-7 bg-white/10 hover:bg-brandCyan text-white rounded-full flex items-center justify-center transition text-xs cursor-pointer">
+                <i class="fa-solid fa-chevron-left"></i>
+              </button>
+              <button type="button" onclick="nextOfferSlide()" class="w-7 h-7 bg-white/10 hover:bg-brandCyan text-white rounded-full flex items-center justify-center transition text-xs cursor-pointer">
+                <i class="fa-solid fa-chevron-right"></i>
+              </button>
+            </div>
+          </div>
+
+          <!-- SLIDE CONTAINER -->
+          <div id="offerSlidesContainer" class="relative min-h-[135px]">
+            <!-- SLIDE 1 -->
+            <div class="offer-slide transition-opacity duration-500 block">
+              <div class="flex justify-between items-start mb-1">
+                <h3 class="text-base sm:text-lg font-bold text-brandCyan">General Health Checkup I</h3>
+                <span class="bg-emerald-500/20 text-emerald-400 text-[10px] font-bold px-2 py-0.5 rounded border border-emerald-500/30">56% OFF</span>
+              </div>
+              <p class="text-xs text-gray-300 mb-2">CBP, ESR, FBS, PPBS, HbA1c, LPT, LFT, RFT/KFT, Iron, TFT, Serum Calcium, Vitamin-D, Vit-B12, CUE.</p>
+              <div class="flex items-center justify-between mt-2 pt-2 border-t border-white/10">
+                <div>
+                  <span class="text-xs text-gray-400 line-through">₹4,600</span>
+                  <span class="text-lg sm:text-xl font-extrabold text-white ml-2">₹2,000/-</span>
+                </div>
+                <a href="#packages" onclick="selectSinglePackageAndScroll('GENERAL HEALTH CHECKUP I')" class="bg-brandCyan hover:bg-cyan-600 text-white text-xs font-bold px-3 py-1.5 rounded transition shadow">
+                  Book Now
+                </a>
+              </div>
+            </div>
+
+            <!-- SLIDE 2 -->
+            <div class="offer-slide transition-opacity duration-500 hidden">
+              <div class="flex justify-between items-start mb-1">
+                <h3 class="text-base sm:text-lg font-bold text-amber-400">General Health Checkup II</h3>
+                <span class="bg-emerald-500/20 text-emerald-400 text-[10px] font-bold px-2 py-0.5 rounded border border-emerald-500/30">48% OFF</span>
+              </div>
+              <p class="text-xs text-gray-300 mb-2">Checkup I tests + Chest X-Ray, ECG, and USG Abdomen scanning included.</p>
+              <div class="flex items-center justify-between mt-2 pt-2 border-t border-white/10">
+                <div>
+                  <span class="text-xs text-gray-400 line-through">₹5,850</span>
+                  <span class="text-lg sm:text-xl font-extrabold text-white ml-2">₹3,000/-</span>
+                </div>
+                <a href="#packages" onclick="selectSinglePackageAndScroll('GENERAL HEALTH CHECKUP II')" class="bg-amber-500 hover:bg-amber-600 text-white text-xs font-bold px-3 py-1.5 rounded transition shadow">
+                  Book Now
+                </a>
+              </div>
+            </div>
+
+            <!-- SLIDE 3 -->
+            <div class="offer-slide transition-opacity duration-500 hidden">
+              <div class="flex justify-between items-start mb-1">
+                <h3 class="text-base sm:text-lg font-bold text-emerald-400">General Health Checkup III</h3>
+                <span class="bg-emerald-500/20 text-emerald-400 text-[10px] font-bold px-2 py-0.5 rounded border border-emerald-500/30">40% OFF</span>
+              </div>
+              <p class="text-xs text-gray-300 mb-2">Checkup II tests + HIV I & II, HBsAg, and 2D ECHO cardiac evaluation.</p>
+              <div class="flex items-center justify-between mt-2 pt-2 border-t border-white/10">
+                <div>
+                  <span class="text-xs text-gray-400 line-through">₹8,430</span>
+                  <span class="text-lg sm:text-xl font-extrabold text-white ml-2">₹5,000/-</span>
+                </div>
+                <a href="#packages" onclick="selectSinglePackageAndScroll('WHOLE BODY CHECKUP MALE')" class="bg-emerald-500 hover:bg-emerald-600 text-white text-xs font-bold px-3 py-1.5 rounded transition shadow">
+                  Book Now
+                </a>
+              </div>
+            </div>
+
+            <!-- SLIDE 4 -->
+            <div class="offer-slide transition-opacity duration-500 hidden">
+              <div class="flex justify-between items-start mb-1">
+                <h3 class="text-base sm:text-lg font-bold text-amber-300">FLAT 50% DISCOUNT</h3>
+                <span class="bg-red-500 text-white text-[10px] font-bold px-2 py-0.5 rounded">LIMITED OFFER</span>
+              </div>
+              <p class="text-xs text-gray-300 mb-2">Flat 50% discount on ALL lab investigations! Free Home Sample Collection available in select areas.</p>
+              <div class="flex items-center justify-between mt-2 pt-2 border-t border-white/10">
+                <div>
+                  <span class="text-base sm:text-lg font-extrabold text-white">50% Off All Tests</span>
+                  <span class="text-[10px] text-brandCyan block">Free Home Pickup (10km Radius)</span>
+                </div>
+                <a href="#book" class="bg-amber-500 hover:bg-amber-600 text-white text-xs font-bold px-3 py-1.5 rounded transition shadow">
+                  Claim Offer
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <!-- SLIDE DOT INDICATORS -->
+          <div class="flex justify-center gap-1.5 mt-3">
+            <span onclick="setOfferSlide(0)" class="offer-dot w-2 h-2 rounded-full bg-brandCyan cursor-pointer"></span>
+            <span onclick="setOfferSlide(1)" class="offer-dot w-2 h-2 rounded-full bg-white/30 cursor-pointer"></span>
+            <span onclick="setOfferSlide(2)" class="offer-dot w-2 h-2 rounded-full bg-white/30 cursor-pointer"></span>
+            <span onclick="setOfferSlide(3)" class="offer-dot w-2 h-2 rounded-full bg-white/30 cursor-pointer"></span>
+          </div>
+        </div>
+      </div>
+
+      <!-- BOOK SAMPLE COLLECTION FORM -->
+      <div id="book" class="bg-white/5 border border-white/10 p-5 sm:p-8 rounded-2xl shadow-xl backdrop-blur-sm">
+        <h3 class="text-xl sm:text-2xl font-bold mb-1 text-white">Book Home Sample Collection</h3>
+        <p class="text-xs text-gray-300 mb-4">Select health packages, upload your doctor's prescription, or enter your location.</p>
+        
+        <div class="mb-4 bg-brandCyan/15 border border-brandCyan/30 rounded-lg p-2.5 flex items-start gap-2 text-xs text-cyan-200">
+          <i class="fa-solid fa-location-dot text-brandCyan text-base shrink-0 mt-0.5"></i>
+          <div>
+            <strong class="text-white block font-semibold">10 km Home Collection Coverage Radius:</strong>
+            <span>Serving Gajularamaram, Jeedimetla, Pragathi Nagar, Quthbullapur, Suraram, Kukatpally, Nizampet & nearby areas.</span>
+          </div>
+        </div>
+
+        <form id="bookingForm" class="space-y-4" onsubmit="handleBookingSubmit(event)">
+          <div>
+            <label class="block text-xs font-semibold uppercase tracking-wider text-gray-300 mb-1">Full Name *</label>
+            <input type="text" id="custName" placeholder="John Doe" class="w-full px-4 py-2.5 rounded bg-white/10 border border-white/20 text-white placeholder-gray-400 focus:outline-none focus:border-brandCyan text-sm" required />
+          </div>
+
+          <div>
+            <label class="block text-xs font-semibold uppercase tracking-wider text-gray-300 mb-1">Phone Number *</label>
+            <input type="tel" id="custPhone" placeholder="+91 9876543210" class="w-full px-4 py-2.5 rounded bg-white/10 border border-white/20 text-white placeholder-gray-400 focus:outline-none focus:border-brandCyan text-sm" required />
+          </div>
+
+          <!-- LOCATION / ADDRESS FIELD WITH AUTOMATIC GPS BUTTON -->
+          <div>
+            <div class="flex justify-between items-center mb-1">
+              <label class="block text-xs font-semibold uppercase tracking-wider text-gray-300">
+                Collection Address & GPS Pin *
+              </label>
+              <button type="button" onclick="getLiveGpsLocation()" class="bg-brandCyan hover:bg-cyan-600 text-white text-[11px] font-bold px-2.5 py-1 rounded flex items-center gap-1.5 transition shadow cursor-pointer">
+                <i class="fa-solid fa-location-crosshairs text-xs"></i> Share Live GPS Pin
+              </button>
+            </div>
+            <textarea 
+              id="custAddress"
+              rows="3" 
+              placeholder="House/Flat No, Street Name, Landmark OR click 'Share Live GPS Pin' above..." 
+              class="w-full px-4 py-2 rounded bg-white/10 border border-white/20 text-white placeholder-gray-400 focus:outline-none focus:border-brandCyan text-sm" 
+              required></textarea>
+          </div>
+
+          <!-- MULTI-SELECT HEALTH PACKAGES DROPDOWN -->
+          <div class="relative">
+            <label class="block text-xs font-semibold uppercase tracking-wider text-gray-300 mb-1">
+              Select Health Packages / Tests
+            </label>
+            <button type="button" id="dropdownToggleBtn" onclick="togglePackageDropdown()" class="w-full px-4 py-2.5 rounded bg-slate-800 border border-white/20 text-white text-left text-sm flex justify-between items-center focus:outline-none focus:border-brandCyan cursor-pointer">
+              <span id="selectedPackagesText" class="truncate text-gray-300">Choose tests or packages...</span>
+              <i class="fa-solid fa-chevron-down text-xs text-brandCyan ml-2"></i>
+            </button>
+
+            <!-- Dropdown Options List -->
+            <div id="packageDropdownList" class="hidden absolute z-30 left-0 right-0 mt-1 max-h-52 overflow-y-auto bg-slate-800 border border-white/20 rounded-lg shadow-2xl p-2 space-y-1">
+              <!-- Dynamically populated via JavaScript -->
+            </div>
+          </div>
+
+          <!-- PRESCRIPTION UPLOAD -->
+          <div>
+            <div class="flex justify-between items-center mb-1">
+              <label class="block text-xs font-semibold uppercase tracking-wider text-gray-300">Upload Doctor's Prescription</label>
+              <span class="text-[10px] text-gray-400">(Optional)</span>
+            </div>
+            <div class="border-2 border-dashed border-white/20 rounded-lg p-3 text-center bg-white/5 hover:bg-white/10 transition cursor-pointer relative">
+              <input type="file" id="prescriptionFile" accept="image/*,.pdf" onchange="updateFileName(this)" class="absolute inset-0 w-full h-full opacity-0 cursor-pointer" />
+              <i class="fa-solid fa-cloud-arrow-up text-xl text-brandCyan mb-1"></i>
+              <p id="uploadLabel" class="text-xs text-gray-300">Click or drag & drop prescription (JPG, PNG, PDF)</p>
+            </div>
+          </div>
+
+          <!-- UPI PAYMENT SECTION -->
+          <div class="p-3 bg-slate-900/80 border border-purple-500/40 rounded-xl space-y-2">
+            <div class="flex justify-between items-center">
+              <span class="text-xs font-bold text-purple-300 flex items-center gap-1.5">
+                <i class="fa-solid fa-qrcode text-purple-400"></i> UPI / PhonePe Payment Option
+              </span>
+              <span id="totalDisplayBadge" class="text-[10px] bg-purple-500/20 text-purple-300 px-2 py-0.5 rounded border border-purple-500/30">Total: ₹0.00</span>
+            </div>
+
+            <div class="grid grid-cols-2 gap-2">
+              <a id="dynamicUpiBtn" href="upi://pay?pa=sunrays2023@ybl&pn=PASHAM%20BASKAR%20REDDY&cu=INR" 
+                 class="bg-purple-600 hover:bg-purple-700 text-white font-semibold py-2 px-3 rounded text-center text-xs flex items-center justify-center gap-1.5 transition shadow">
+                <i class="fa-solid fa-mobile-screen"></i> Pay via UPI App
+              </a>
+              <button type="button" onclick="openQrModal()" 
+                      class="bg-slate-800 hover:bg-slate-700 text-purple-300 border border-purple-500/40 font-semibold py-2 px-3 rounded text-center text-xs flex items-center justify-center gap-1.5 transition cursor-pointer">
+                <i class="fa-solid fa-qrcode"></i> Show UPI QR Code
+              </button>
+            </div>
+
+            <div>
+              <label class="block text-[10px] uppercase font-semibold text-gray-400 mt-1 mb-0.5">UPI Payment Reference / UTR No. (Optional)</label>
+              <input type="text" id="utrNumber" placeholder="Enter 12-digit UTR or Txn ID" class="w-full px-3 py-1.5 rounded bg-white/10 border border-white/20 text-white placeholder-gray-500 focus:outline-none focus:border-purple-400 text-xs" />
+            </div>
+          </div>
+
+          <button type="submit" id="submitBtn" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3 rounded transition shadow-lg mt-2 text-sm flex items-center justify-center gap-2 cursor-pointer">
+            <i class="fa-brands fa-whatsapp text-lg"></i> Send Request via WhatsApp
+          </button>
+        </form>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- HEALTH PACKAGES & CATALOG SECTION -->
+  <section id="packages" class="py-12 sm:py-16 px-4 sm:px-8 bg-brandLight">
+    <div class="max-w-7xl mx-auto">
+      <div class="text-center max-w-2xl mx-auto mb-8 sm:mb-10">
+        <h2 class="text-2xl sm:text-3xl font-bold text-brandBlue mb-2 sm:mb-3">Health Packages & Test Catalog</h2>
+        <p class="text-gray-600 text-xs sm:text-base">Browse and book individual tests, screening panels, and discounted wellness profiles.</p>
+      </div>
+
+      <!-- Filters & Search Bar -->
+      <div class="bg-white p-4 rounded-xl shadow-sm border border-gray-200 mb-8 flex flex-col md:flex-row gap-4 justify-between items-center">
+        <div class="relative w-full md:w-96">
+          <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-3.5 text-gray-400"></i>
+          <input type="text" id="searchInput" onkeyup="filterItems()" placeholder="Search test or package..." class="w-full pl-10 pr-4 py-2 bg-gray-50 border border-gray-300 rounded-lg text-sm focus:outline-none focus:border-brandCyan">
+        </div>
+
+        <div class="flex items-center gap-3 w-full md:w-auto">
+          <label class="text-sm font-semibold text-gray-600 whitespace-nowrap">Filter Category:</label>
+          <select id="categoryFilter" onchange="filterItems()" class="w-full md:w-auto px-4 py-2 bg-gray-50 border border-gray-300 rounded-lg text-sm focus:outline-none focus:border-brandCyan font-medium">
+            <option value="ALL">All Categories</option>
+            <option value="Health Packages">Health Packages</option>
+            <option value="BIOCHEMISTRY">Biochemistry</option>
+            <option value="HORMONE ASSAYS">Hormone Assays</option>
+            <option value="CYTOLOGY">Cytology</option>
+            <option value="HISTOPATHOLOGY">Histopathology</option>
+            <option value="ULTRA SOUND">Ultrasound</option>
+            <option value="X-Ray">X-Ray / Imaging</option>
+            <option value="CLINICAL PATHOLOGY">Clinical Pathology</option>
+            <option value="SEROLOGY">Serology</option>
+            <option value="MICROBIOLOGY">Microbiology</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Grid Catalog -->
+      <div id="catalogGrid" class="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6">
+        <!-- Dynamically populated -->
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer id="contact" class="bg-brandBlue text-gray-300 pt-12 sm:pt-16 pb-8 px-4 sm:px-8 border-t border-slate-700">
+    <div class="max-w-7xl mx-auto grid md:grid-cols-3 gap-8 sm:gap-12 mb-12">
+      <div>
+        <h3 class="text-xl sm:text-2xl font-bold text-white mb-3 sm:mb-4">Sunrays Diagnostic</h3>
+        <p class="text-xs sm:text-sm text-gray-400 mb-4">
+          Delivering reliable diagnostic healthcare services with modern technology in Gajularamaram, Hyderabad.
+        </p>
+      </div>
+
+      <div>
+        <h4 class="text-base sm:text-lg font-bold text-white mb-3 sm:mb-4">Contact Details</h4>
+        <ul class="space-y-2.5 sm:space-y-3 text-xs sm:text-sm">
+          <li class="flex items-start gap-3">
+            <i class="fa-solid fa-location-dot text-brandCyan mt-1"></i>
+            <span>H.No. 04-085/4, Beside Chittaramma Temple, Usha Mullapudi Road, Gajularamaram, Hyderabad - 500 055</span>
+          </li>
+          <li class="flex items-center gap-3">
+            <i class="fa-solid fa-phone text-brandCyan"></i>
+            <span>+91-9347788171</span>
+          </li>
+          <li class="flex items-center gap-3">
+            <i class="fa-solid fa-envelope text-brandCyan"></i>
+            <span>Sunraysdiagnostics2023@gmail.com</span>
+          </li>
+        </ul>
+      </div>
+
+      <div>
+        <h4 class="text-base sm:text-lg font-bold text-white mb-3 sm:mb-4">Quick Links</h4>
+        <ul class="space-y-2 text-xs sm:text-sm">
+          <li><a href="#about" class="hover:text-brandCyan">About Us</a></li>
+          <li><a href="#services" class="hover:text-brandCyan">Services Offered</a></li>
+          <li><a href="#packages" class="hover:text-brandCyan">Health Packages</a></li>
+          <li><a href="#contact" class="hover:text-brandCyan">Contact Us</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="max-w-7xl mx-auto border-t border-slate-800 pt-6 text-center text-[11px] sm:text-xs text-gray-500">
+      © 2026 Sunrays Diagnostics. All Rights Reserved.
+    </div>
+  </footer>
+
+  <!-- FLOATING CALL WIDGET -->
+  <a href="tel:+919347788171" 
+     aria-label="Call Sunrays Diagnostic"
+     class="fixed bottom-5 right-5 bg-emerald-500 hover:bg-emerald-600 text-white p-3 sm:px-5 sm:py-3.5 rounded-full shadow-2xl flex items-center gap-2 sm:gap-3 z-50 transition-all duration-300 transform hover:scale-105 group border-2 border-white">
+    <span class="relative flex h-2.5 w-2.5 sm:h-3 sm:w-3">
+      <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-white opacity-75"></span>
+      <span class="relative inline-flex rounded-full h-2.5 w-2.5 sm:h-3 sm:w-3 bg-white"></span>
+    </span>
+    <i class="fa-solid fa-phone text-base sm:text-lg"></i>
+    <span class="font-bold text-xs sm:text-sm hidden sm:inline tracking-wide">Call Now: +91-9347788171</span>
+  </a>
+
+  <!-- UPI QR CODE MODAL POPUP -->
+  <div id="qrModal" class="hidden fixed inset-0 z-50 flex items-center justify-center bg-black/70 p-4 backdrop-blur-xs">
+    <div class="bg-white rounded-2xl max-w-sm w-full p-6 text-center shadow-2xl relative animate-fade-in">
+      <button type="button" onclick="closeQrModal()" class="absolute top-3 right-3 text-gray-400 hover:text-gray-700 text-xl font-bold p-1 cursor-pointer">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+
+      <div class="flex items-center justify-center gap-2 mb-2">
+        <span class="text-xl font-bold text-purple-700">PhonePe / UPI</span>
+      </div>
+
+      <p class="text-xs text-gray-500 mb-3">Scan using PhonePe, Google Pay, Paytm, or any UPI App</p>
+
+      <div class="bg-white p-3 rounded-xl border border-gray-200 inline-block shadow-sm mb-3">
+        <img id="qrCodeImg" 
+             src="https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=upi%3A%2F%2Fpay%3Fpa%3Dsunrays2023%40ybl%26pn%3DPASHAM%2520BASKAR%2520REDDY%26cu%3DINR" 
+             alt="PhonePe QR Code - Sunrays Diagnostic" 
+             class="w-52 h-52 rounded-lg mx-auto" />
+      </div>
+
+      <div class="bg-purple-50 p-3 rounded-lg border border-purple-200 text-left mb-4">
+        <p class="text-[11px] text-gray-500 uppercase font-semibold">Account Name</p>
+        <p class="text-sm font-bold text-gray-800 mb-1">PASHAM BASKAR REDDY</p>
+        <p class="text-[11px] text-gray-500 uppercase font-semibold">UPI ID (VPA)</p>
+        <div class="flex justify-between items-center">
+          <span class="text-xs font-mono font-bold text-purple-700">sunrays2023@ybl</span>
+          <button type="button" onclick="copyUpiId()" class="text-[10px] bg-purple-600 text-white font-bold px-2 py-1 rounded hover:bg-purple-700 transition cursor-pointer">
+            Copy ID
+          </button>
+        </div>
+      </div>
+
+      <button type="button" onclick="closeQrModal()" class="w-full bg-brandBlue text-white font-bold py-2.5 rounded-lg text-xs hover:bg-slate-800 transition cursor-pointer">
+        Done / Back to Booking
+      </button>
+    </div>
+  </div>
+
+  <!-- SCRIPTS -->
+  <script>
+    // SUPABASE CONFIGURATION
+    const SUPABASE_URL = "https://ehtcwppottewnlbujvlh.supabase.co";
+    const SUPABASE_ANON_KEY = "sb_publishable_sSMaMTOhwUbdllRVHhSQnw_lMJj4_aT";
+    
+    let supabaseClient = null;
+    try {
+      if (window.supabase && typeof window.supabase.createClient === 'function') {
+        supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+      }
+    } catch (e) {
+      console.error("Supabase initialization error:", e);
+    }
+
+    const WHATSAPP_NUMBER = "919502060984";
+
+    // CATALOG DATA
+    const itemsData = [
+      { cat: "Health Packages", name: "LIVE SYSTEM TEST (₹0.01)", orig: "1.00", curr: "0.01" },
+      { cat: "Health Packages", name: "GENERAL HEALTH CHECKUP I", orig: "4600.00", curr: "2000.00" },
+      { cat: "Health Packages", name: "GENERAL HEALTH CHECKUP II", orig: "5850.00", curr: "3000.00" },
+      { cat: "Health Packages", name: "GENERAL HEALTH CHECKUP III", orig: "8430.00", curr: "5000.00" },
+      { cat: "Health Packages", name: "WHOLE BODY CHECKUP WOMEN", orig: null, curr: "7000.00" },
+      { cat: "Health Packages", name: "WHOLE BODY CHECKUP MALE", orig: null, curr: "7000.00" },
+      { cat: "Health Packages", name: "WELL WOMEN CHECK UP", orig: null, curr: "2000.00" },
+      { cat: "Health Packages", name: "WELL MEN CHECK UP", orig: null, curr: "4000.00" },
+      { cat: "Health Packages", name: "VIRAL PROFILE", orig: null, curr: "1490.00" },
+      { cat: "Health Packages", name: "Basic Diabetic profile", orig: null, curr: "1000.00" },
+      { cat: "HORMONE ASSAYS", name: "THYROID PROFILE (TFT)", orig: "700.00", curr: "350.00" },
+      { cat: "HORMONE ASSAYS", name: "VITAMIN B-12", orig: "1200.00", curr: "600.00" },
+      { cat: "BIOCHEMISTRY", name: "LIVER FUNCTION TEST (LFT)", orig: "600.00", curr: "300.00" },
+      { cat: "BIOCHEMISTRY", name: "RENAL FUNCTION TEST (RFT)", orig: "1600.00", curr: "800.00" },
+      { cat: "CLINICAL PATHOLOGY", name: "COMPLETE URINE EXAMINATION (CUE)", orig: "200.00", curr: "100.00" }
+    ];
+
+    // CAROUSEL / OFFER SLIDER LOGIC
+    let currentSlide = 0;
+    function showSlide(index) {
+      const slides = document.querySelectorAll('.offer-slide');
+      const dots = document.querySelectorAll('.offer-dot');
+      if (!slides.length) return;
+
+      slides.forEach((slide, i) => {
+        if (i === index) {
+          slide.classList.remove('hidden');
+          slide.classList.add('block');
+        } else {
+          slide.classList.remove('block');
+          slide.classList.add('hidden');
+        }
+      });
+
+      dots.forEach((dot, i) => {
+        if (i === index) {
+          dot.classList.remove('bg-white/30');
+          dot.classList.add('bg-brandCyan');
+        } else {
+          dot.classList.remove('bg-brandCyan');
+          dot.classList.add('bg-white/30');
+        }
+      });
+
+      currentSlide = index;
+    }
+
+    function nextOfferSlide() {
+      const slides = document.querySelectorAll('.offer-slide');
+      if (!slides.length) return;
+      let next = (currentSlide + 1) % slides.length;
+      showSlide(next);
+    }
+
+    function prevOfferSlide() {
+      const slides = document.querySelectorAll('.offer-slide');
+      if (!slides.length) return;
+      let prev = (currentSlide - 1 + slides.length) % slides.length;
+      showSlide(prev);
+    }
+
+    function setOfferSlide(index) {
+      showSlide(index);
+    }
+
+    setInterval(nextOfferSlide, 5000);
+
+    // LIVE GPS LOCATION FETCHER FUNCTION
+    function getLiveGpsLocation() {
+      const addressBox = document.getElementById('custAddress');
+      
+      if (!navigator.geolocation) {
+        alert("Geolocation is not supported by your browser.");
+        return;
+      }
+
+      addressBox.value = "Fetching your live GPS location... Please allow permission popup.";
+
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          const lat = position.coords.latitude;
+          const lon = position.coords.longitude;
+          const mapsLink = `https://www.google.com/maps?q=${lat},${lon}`;
+          
+          addressBox.value = `Google Maps Pin: ${mapsLink}`;
+          alert("Live GPS pin successfully captured and added to your address!");
+        },
+        (error) => {
+          console.error(error);
+          alert("Unable to retrieve your location. Please check browser location permissions.");
+          addressBox.value = "";
+        },
+        { enableHighAccuracy: true, timeout: 10000, maximumAge: 0 }
+      );
+    }
+
+    // MULTI-SELECT DROPDOWN LOGIC
+    let selectedPackages = [];
+
+    function initMultiSelectDropdown() {
+      const dropdownList = document.getElementById('packageDropdownList');
+      if (!dropdownList) return;
+      dropdownList.innerHTML = '';
+
+      itemsData.forEach((item) => {
+        const itemEl = document.createElement('label');
+        itemEl.className = "flex items-center gap-2 p-2 rounded hover:bg-slate-700 cursor-pointer text-xs text-gray-200 border-b border-slate-700/50 last:border-0";
+        itemEl.innerHTML = `
+          <input type="checkbox" value="${item.name}" onchange="togglePackageSelection('${item.name.replace(/'/g, "\\'")}')" class="rounded text-brandCyan focus:ring-0 accent-brandCyan">
+          <span class="flex-1 font-medium">${item.name}</span>
+          <span class="text-brandCyan font-bold">₹${item.curr}</span>
+        `;
+        dropdownList.appendChild(itemEl);
+      });
+    }
+
+    function togglePackageDropdown() {
+      const dropdownList = document.getElementById('packageDropdownList');
+      if (dropdownList) {
+        dropdownList.classList.toggle('hidden');
+      }
+    }
+
+    function togglePackageSelection(itemName) {
+      const index = selectedPackages.indexOf(itemName);
+      if (index > -1) {
+        selectedPackages.splice(index, 1);
+      } else {
+        selectedPackages.push(itemName);
+      }
+      updateSelectedPackagesText();
+      updateDynamicUpiLink();
+    }
+
+    function selectSinglePackageAndScroll(itemName) {
+      if (!selectedPackages.includes(itemName)) {
+        selectedPackages.push(itemName);
+        const checkboxes = document.querySelectorAll('#packageDropdownList input[type="checkbox"]');
+        checkboxes.forEach(cb => {
+          if (cb.value === itemName) cb.checked = true;
+        });
+        updateSelectedPackagesText();
+        updateDynamicUpiLink();
+      }
+      const bookSection = document.getElementById('book');
+      if (bookSection) {
+        bookSection.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+
+    function updateSelectedPackagesText() {
+      const label = document.getElementById('selectedPackagesText');
+      if (!label) return;
+      if (selectedPackages.length === 0) {
+        label.innerText = 'Choose tests or packages...';
+        label.classList.add('text-gray-400');
+        label.classList.remove('text-white', 'font-semibold');
+      } else if (selectedPackages.length === 1) {
+        label.innerText = selectedPackages[0];
+        label.classList.remove('text-gray-400');
+        label.classList.add('text-white', 'font-semibold');
+      } else {
+        label.innerText = `${selectedPackages.length} Packages Selected`;
+        label.classList.remove('text-gray-400');
+        label.classList.add('text-white', 'font-semibold');
+      }
+    }
+
+    function updateDynamicUpiLink() {
+      let total = 0;
+      selectedPackages.forEach(pkgName => {
+        const item = itemsData.find(i => i.name === pkgName);
+        if (item) {
+          total += parseFloat(item.curr);
+        }
+      });
+
+      const totalFormatted = total.toFixed(2);
+      const totalBadge = document.getElementById('totalDisplayBadge');
+      if (totalBadge) totalBadge.innerText = `Total: ₹${totalFormatted}`;
+
+      const dynamicBtn = document.getElementById('dynamicUpiBtn');
+      const qrImg = document.getElementById('qrCodeImg');
+
+      if (total > 0) {
+        const upiUri = `upi://pay?pa=sunrays2023@ybl&pn=PASHAM%20BASKAR%20REDDY&am=${totalFormatted}&cu=INR`;
+        if (dynamicBtn) dynamicBtn.href = upiUri;
+        if (qrImg) qrImg.src = `https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=${encodeURIComponent(upiUri)}`;
+      } else {
+        const defaultUri = `upi://pay?pa=sunrays2023@ybl&pn=PASHAM%20BASKAR%20REDDY&cu=INR`;
+        if (dynamicBtn) dynamicBtn.href = defaultUri;
+        if (qrImg) qrImg.src = `https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=${encodeURIComponent(defaultUri)}`;
+      }
+    }
+
+    // Hide dropdown when clicking outside
+    document.addEventListener('click', function(event) {
+      const container = document.getElementById('book');
+      const dropdown = document.getElementById('packageDropdownList');
+      const toggleBtn = document.getElementById('dropdownToggleBtn');
+      if (container && dropdown && toggleBtn) {
+        if (!container.contains(event.target)) {
+          dropdown.classList.add('hidden');
+        }
+      }
+    });
+
+    function updateFileName(input) {
+      const label = document.getElementById('uploadLabel');
+      if (input.files && input.files[0] && label) {
+        label.innerText = `Selected File: ${input.files[0].name}`;
+        label.classList.add('text-brandCyan', 'font-semibold');
+      }
+    }
+
+    // QR MODAL LOGIC
+    function openQrModal() {
+      const modal = document.getElementById('qrModal');
+      if (modal) modal.classList.remove('hidden');
+    }
+
+    function closeQrModal() {
+      const modal = document.getElementById('qrModal');
+      if (modal) modal.classList.add('hidden');
+    }
+
+    function copyUpiId() {
+      navigator.clipboard.writeText("sunrays2023@ybl");
+      alert("UPI ID (sunrays2023@ybl) copied to clipboard!");
+    }
+
+    // WHATSAPP SUBMISSION WITH SUPABASE UPLOAD
+    async function handleBookingSubmit(event) {
+      event.preventDefault();
+      
+      const submitBtn = document.getElementById('submitBtn');
+      const originalBtnText = submitBtn.innerHTML;
+      submitBtn.disabled = true;
+      submitBtn.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i> Processing request...`;
+
+      const name = document.getElementById('custName').value.trim();
+      const phone = document.getElementById('custPhone').value.trim();
+      const address = document.getElementById('custAddress').value.trim();
+      const utr = document.getElementById('utrNumber').value.trim();
+      const fileInput = document.getElementById('prescriptionFile');
+
+      let prescriptionPublicUrl = "";
+
+      try {
+        if (supabaseClient && fileInput && fileInput.files && fileInput.files[0]) {
+          const file = fileInput.files[0];
+          const fileExt = file.name.split('.').pop();
+          const fileName = `${Date.now()}_${Math.random().toString(36).substring(2, 7)}.${fileExt}`;
+          
+          const { data, error } = await supabaseClient.storage
+            .from('prescriptions')
+            .upload(fileName, file);
+
+          if (!error) {
+            const { data: publicData } = supabaseClient.storage
+              .from('prescriptions')
+              .getPublicUrl(fileName);
+            
+            if (publicData) {
+              prescriptionPublicUrl = publicData.publicUrl;
+            }
+          }
+        }
+      } catch (err) {
+        console.error("Storage upload error:", err);
+      }
+
+      let message = `*New Home Sample Collection Booking*\n\n`;
+      message += `*Name:* ${name}\n`;
+      message += `*Phone:* ${phone}\n`;
+      message += `*Address / GPS:* ${address}\n`;
+
+      if (selectedPackages.length > 0) {
+        message += `*Selected Tests / Packages:*\n`;
+        selectedPackages.forEach((pkg, i) => {
+          message += `  ${i + 1}. ${pkg}\n`;
+        });
+      } else {
+        message += `*Selected Tests:* None selected\n`;
+      }
+
+      if (prescriptionPublicUrl) {
+        message += `*Prescription File Link:* ${prescriptionPublicUrl}\n`;
+      } else {
+        message += `*Prescription:* Not attached\n`;
+      }
+
+      if (utr) {
+        message += `*Payment UTR / Ref No:* ${utr}\n`;
+      } else {
+        message += `*Payment Status:* Pending / Cash on Pickup\n`;
+      }
+
+      const encodedMessage = encodeURIComponent(message);
+      const whatsappUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodedMessage}`;
+      
+      submitBtn.disabled = false;
+      submitBtn.innerHTML = originalBtnText;
+
+      window.open(whatsappUrl, '_blank');
+    }
+
+    function renderCatalog(items) {
+      const grid = document.getElementById('catalogGrid');
+      if (!grid) return;
+      grid.innerHTML = '';
+
+      if (items.length === 0) {
+        grid.innerHTML = `<div class="col-span-full text-center py-10 text-gray-500">No matching tests or packages found.</div>`;
+        return;
+      }
+
+      items.forEach(item => {
+        const card = document.createElement('div');
+        card.className = "bg-white rounded-xl p-4 sm:p-5 border border-gray-200 shadow-sm flex flex-col justify-between hover:shadow-md transition";
+
+        const hasDiscount = item.orig !== null && item.orig !== item.curr;
+        const escapedName = item.name.replace(/'/g, "\\'");
+        
+        card.innerHTML = `
+          <div>
+            <span class="text-[10px] uppercase font-bold tracking-wider text-brandCyan bg-cyan-50 px-2 py-0.5 rounded inline-block mb-2">${item.cat}</span>
+            <h4 class="font-bold text-gray-800 text-xs sm:text-sm mb-3 leading-snug">${item.name}</h4>
+          </div>
+          <div class="mt-4 pt-3 border-t border-gray-100 flex items-center justify-between">
+            <div>
+              ${hasDiscount ? `<span class="text-xs text-gray-400 line-through block">₹${item.orig}</span>` : ''}
+              <span class="text-base sm:text-lg font-extrabold text-brandBlue">₹${item.curr}</span>
+            </div>
+            <button type="button" onclick="selectSinglePackageAndScroll('${escapedName}')" class="bg-brandBlue hover:bg-brandCyan text-white text-xs font-bold px-3 py-1.5 sm:py-2 rounded transition cursor-pointer">
+              Book
+            </button>
+          </div>
+        `;
+        grid.appendChild(card);
+      });
+    }
+
+    function filterItems() {
+      const searchInput = document.getElementById('searchInput');
+      const categoryFilter = document.getElementById('categoryFilter');
+      if (!searchInput || !categoryFilter) return;
+
+      const searchVal = searchInput.value.toLowerCase();
+      const catVal = categoryFilter.value;
+
+      const filtered = itemsData.filter(item => {
+        const matchesSearch = item.name.toLowerCase().includes(searchVal) || item.cat.toLowerCase().includes(searchVal);
+        const matchesCat = (catVal === 'ALL') || (item.cat === catVal);
+        return matchesSearch && matchesCat;
+      });
+
+      renderCatalog(filtered);
+    }
+
+    // Initialize scripts on page load
+    document.addEventListener('DOMContentLoaded', () => {
+      initMultiSelectDropdown();
+      renderCatalog(itemsData);
+      showSlide(0);
+    });
+  </script>
+
+  <!-- Cloudflare Web Analytics -->
+  <script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "9f4fb510cdb540689bd06be31ad474b8"}'></script>
+</body>
+</html>
